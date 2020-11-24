@@ -50,7 +50,7 @@ EXPOSE 3000
 CMD node app.js
 ```
 
-Esta sera la [ubicacion](https://github.com/user/repository/fork) donde esta el DockerFile.
+Esta sera la [ubicacion](https://github.com/Tonomolla6/Metrics_Prometheus_Grafana_Nodejs/src) donde esta el DockerFile.
 
 ![file manager](img/ubicacion_src.png)
 
