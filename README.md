@@ -1,18 +1,15 @@
 # PRACTICA ENTREGABLE DOCKER
 
 ## ¿Qué es Docker?
-
-Docker es un software que nos permite crear contenedores, facilita la miGracion entre diferentes plataformas y garantiza su funcionamiento completo, asi evitando cualquier tipo de posible problema de dependencia entre versiones de software. Su funcionamiento ser basa en compartir un único sistema operativo en la máquina que lo hospeda.
-
 ![docker](img/docker.jpg)
+Docker es un software que nos permite crear contenedores, facilita la miGracion entre diferentes plataformas y garantiza su funcionamiento completo, asi evitando cualquier tipo de posible problema de dependencia entre versiones de software. Su funcionamiento ser basa en compartir un único sistema operativo en la máquina que lo hospeda.
 
 ## ¿Qué es Docker Compose?
 
 Docker Compose es una herramienta que nos permitirá definir y ejecutar múltiples aplicaciones utilizando contenedores, utilizaremos ficheros en formato YAML, que nos servirán para definir la configuración de la aplicación en cuestión. De esta manera podemos, con un solo comando, crear e iniciar los servicios configurados en estos ficheros.
 
-![docker compose](img/docker_compose.png)
-
 ## Práctica
+
 ### Propósito
 
 En esta práctica vamos a ver como crear un docker-compose que inicie 3 contenedores conectados entre si con la misma red.
@@ -157,6 +154,19 @@ command: --config.file=/etc/prometheus/prometheus.yml
 
 Por supuesto, para que este servicio funcione correctamente, el servicio responsable de arrancar la aplicación debe ejecutarse antes y el servicio deberá pertenecer a la red común “network_practica”. 
 
+Esta sera la [ubicacion](https://github.com/Tonomolla6/Metrics_Prometheus_Grafana_Nodejs/prometheus) donde esta el archivo prometheus.yml.
+
+prometheus.yml
+```yml
+global:
+  scrape_interval: 5s
+  evaluation_interval: 30s
+scrape_configs:
+  - job_name: "example-nodejs-app"
+    honor_labels: true
+    static_configs:
+      - targets: ["myapp_practica:3000"]
+```
 El servicio en docker compose quedaria asi:
 
 ```yml
@@ -172,4 +182,83 @@ El servicio en docker compose quedaria asi:
     command: --config.file=/etc/prometheus/prometheus.yml
     depends_on:
      - myapp_practica_service
+```
+
+### Crear un contenedor con Docker Compose a partir de una imagen (Prometheus)
+Este servicio será el encargado de graficar todas las métricas creadas por el servicio de Prometheus. Por tanto, siempre arrancará tras él. En nuestro caso, el servicio de grafana se encargará de arrancar en el puerto 3500 de nuestro host un contenedor (grafana_practica) basado en la imagen grafana/grafana:7.1.5 que, además, se caracterizará por: 
+
+Establecer las variables de entorno necesarias para: 
+
+- Deshabilitar el login de acceso a Grafana 
+```yaml
+GF_AUTH_DISABLE_LOGIN_FORM: "true"
+```
+
+- Permitir la autenticación anónima 
+```yaml
+GF_AUTH_ANONYMOUS_ENABLED: "true"
+```
+
+- Que el rol de autenticación anónima sea Admin
+```yaml
+GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
+```
+
+- Que instale el plugin grafana-clock-panel 1.0.1 
+```yaml
+GF_INSTALL_PLUGINS: grafana-clock-panel 1.0.1
+```
+
+Pertenece a la red común “network_practica” 
+```yaml
+networks:
+  network_practica:
+```
+
+Dispondrá de un volumen nombrado (myGrafanaVol) que permitirá almacenar los cambios en el servicio ya que se asociará con el directorio /var/lib/grafana 
+```yaml
+    volumes:
+      - 'myGrafanaVol:/var/lib/grafana/'
+volumes:
+  myGrafanaVol:
+```
+
+Esta sera la [ubicacion](https://github.com/Tonomolla6/Metrics_Prometheus_Grafana_Nodejs/grafana) donde esta el archivo datasources.yml.
+
+datasources.yml
+```yml
+apiVersion: 1
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    orgId: 1
+    url: prometheus_practica:9090
+    basicAuth: false
+    isDefault: true
+    editable: true
+```
+
+El servicio en docker compose quedaria asi:
+```yaml
+  grafana_practica_service:
+    container_name: grafana_practica
+    image: grafana/grafana:7.1.5
+    ports:
+      - "3500:3000"
+    networks:
+      network_practica:
+    environment:
+      GF_AUTH_DISABLE_LOGIN_FORM: "true"
+      GF_INSTALL_PLUGINS: grafana-clock-panel 1.0.1
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
+    volumes:
+      - 'myGrafanaVol:/var/lib/grafana/'
+      - './grafana/datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml'
+    depends_on:
+     - prometheus_practica_service
+
+volumes:
+  myGrafanaVol:
 ```
