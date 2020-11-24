@@ -14,7 +14,7 @@ Docker Compose es una herramienta que nos permitirá definir y ejecutar múltipl
 
 ## Práctica
 
-![nodejs](img/node.jpg)
+![nodejs](img/nodejs.jpg)
 
 ### Propósito
 
@@ -52,7 +52,7 @@ CMD node app.js
 
 Esta sera la [ubicacion](https://github.com/user/repository/fork) donde esta el DockerFile.
 
-![file manager](img/ubicacion_src.jpg)
+![file manager](img/ubicacion_src.png)
 
 Dockerfile con las exigencias añadidas anteriormente
 
