@@ -13,9 +13,6 @@ Docker Compose es una herramienta que nos permitirá definir y ejecutar múltipl
 ![docker compose](img/docker_compose.png)
 
 ## Práctica
-
-![nodejs](img/nodejs.jpg)
-
 ### Propósito
 
 En esta práctica vamos a ver como crear un docker-compose que inicie 3 contenedores conectados entre si con la misma red.
@@ -54,6 +51,63 @@ Esta sera la [ubicacion](https://github.com/Tonomolla6/Metrics_Prometheus_Grafan
 
 ![file manager](img/ubicacion_src.png)
 
+app.js
+```javascript
+const client = require('prom-client');
+const express = require('express');
+const server = express();
+
+const collectDefaultMetrics = client.collectDefaultMetrics;
+collectDefaultMetrics({ timeout: 5000 });
+
+const counterHomeEndpoint = new client.Counter({
+    name: 'counterHomeEndpoint',
+    help: 'The total number of processed requests'
+});
+
+const counterMessageEndpoint = new client.Counter({
+    name: 'counterMessageEndpoint',
+    help: 'The total number of processed requests to get endpoint'
+});
+
+server.get('/', (req, res) => {
+    counterHomeEndpoint.inc();
+    res.send('Hello world\n');
+});
+
+server.get('/message', (req, res) => {
+    counterMessageEndpoint.inc();
+    res.send('Message endpoint\n');
+});
+
+server.get('/metrics', (req, res) => {
+   res.set('Content-Type', client.register.contentType);
+   res.end(client.register.metrics());
+});
+
+console.log('Server listening to 3000, metrics exposed on /metrics endpoint');
+server.listen(3000);
+```
+
+package.json
+```json
+{
+  "name": "myapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "prom-client": "^12.0.0",
+    "response-time": "^2.3.2"
+  }
+}
+```
 Dockerfile con las exigencias añadidas anteriormente
 
 ```dockerfile
@@ -75,7 +129,7 @@ version: "3"
 services:
   myapp_practica_service:
     container_name: myapp_practica
-    build: .
+    build: ./src/
     ports:
       - "83:3000"
     networks:
@@ -83,4 +137,39 @@ services:
 networks:
   network_practica:
     external: true
+```
+
+### Crear un contenedor con Docker Compose a partir de una imagen (Prometheus)
+
+Prometheus es una aplicación que nos permite recoger métricas de una aplicación en tiempo real. Como veréis en el ejemplo de app.js, se incluye una dependencia en el código (prom-client) que permite crear contadores de peticiones que podemos asociar fácilmente a nuestros endpoints de manera que podemos saber cuántas veces se ha llamado a una función de nuestra api. 
+En nuestro caso, el servicio de prometheus se encargará de arrancar en el puerto 9090 de nuestro host un contenedor (prometheus_practica) basado en la imagen prom/prometheus:v2.20.1. Para poder configurar correctamente este servicio, será necesario realizar además dos acciones: 
+
+- Copiar el fichero adjunto prometheus.yml al directorio /etc/prometheus del contenedor 
+```yaml
+volumes:
+  - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+```
+
+- Ejecutar el comando --config.file=/etc/prometheus/prometheus.yml 
+```yaml
+command: --config.file=/etc/prometheus/prometheus.yml
+```
+
+Por supuesto, para que este servicio funcione correctamente, el servicio responsable de arrancar la aplicación debe ejecutarse antes y el servicio deberá pertenecer a la red común “network_practica”. 
+
+El servicio en docker compose quedaria asi:
+
+```yml
+  prometheus_practica_service:
+    container_name: prometheus_practica
+    image: prom/prometheus:v2.20.1
+    ports:
+      - "9090:9090"
+    networks:
+      network_practica:
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command: --config.file=/etc/prometheus/prometheus.yml
+    depends_on:
+     - myapp_practica_service
 ```
