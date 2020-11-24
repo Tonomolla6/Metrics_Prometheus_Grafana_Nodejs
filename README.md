@@ -14,7 +14,7 @@ Docker Compose es una herramienta que nos permitirá definir y ejecutar múltipl
 
 ## Práctica
 
-![nodejs](img/nodejs.jpg)
+![nodejs](img/node.jpg)
 
 ### Propósito
 
@@ -31,32 +31,32 @@ En esta práctica vamos a ver como crear un docker-compose que inicie 3 contened
 Este servicio se encargará de arrancar un contenedor (myapp_practica) en el que, partiendo de un Dockerfile, se pondrá en marcha un servidor express muy sencillo (con un app.js y un package.json).
 
 - Partirá de una imagen de node (versión alpine3.10)
-```
+```dockerfile
 FROM alpine:3.10
 ```
 
 - Establecerá un directorio de trabajo “myapp” donde residirá el código de la aplicación. 
-```
+```dockerfile
 WORKDIR /myapp
 ```
 
 - Expondrá el puerto publicado por el servidor express. 
-```
+```dockerfile
 EXPOSE 3000
 ```
 
 - Ejecutará como comando la instrucción necesaria para arrancar el servidor express. 
-```
+```dockerfile
 CMD node app.js
 ```
 
-Esta sera la [ubicacion](https://github.com/Tonomolla6/Metrics_Prometheus_Grafana_Nodejs/src) donde esta el DockerFile.
+Esta sera la [ubicacion](https://github.com/user/repository/fork) donde esta el DockerFile.
 
-![file manager](img/ubicacion_src.png)
+![file manager](img/ubicacion_src.jpg)
 
 Dockerfile con las exigencias añadidas anteriormente
 
-```
+```dockerfile
 FROM alpine:3.10
 WORKDIR /myapp
 COPY . .
