@@ -14,7 +14,7 @@ Docker Compose es una herramienta que nos permitirá definir y ejecutar múltipl
 
 ## Práctica
 
-![nodejs](img/node.jpg)
+![nodejs](img/nodejs.jpg)
 
 ### Propósito
 
@@ -50,9 +50,9 @@ EXPOSE 3000
 CMD node app.js
 ```
 
-Esta sera la [ubicacion](https://github.com/user/repository/fork) donde esta el DockerFile.
+Esta sera la [ubicacion](https://github.com/Tonomolla6/Metrics_Prometheus_Grafana_Nodejs/src) donde esta el DockerFile.
 
-![file manager](img/ubicacion_src.jpg)
+![file manager](img/ubicacion_src.png)
 
 Dockerfile con las exigencias añadidas anteriormente
 
@@ -67,3 +67,20 @@ CMD node app.js
 ```
 
 Por otra parte, este servicio asociado a la aplicación, se publicará en el puerto 83 y pertenece a una red común a todos los servicios denominada “network_practica” 
+
+El servicio en docker compose quedaria asi:
+
+```yaml
+version: "3"
+services:
+  myapp_practica_service:
+    container_name: myapp_practica
+    build: .
+    ports:
+      - "83:3000"
+    networks:
+      network_practica:
+networks:
+  network_practica:
+    external: true
+```
