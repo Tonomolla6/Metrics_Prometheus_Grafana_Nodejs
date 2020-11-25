@@ -184,7 +184,7 @@ El servicio en docker compose quedaria asi:
      - myapp_practica_service
 ```
 
-### Crear un contenedor con Docker Compose a partir de una imagen (Grafena)
+### Crear un contenedor con Docker Compose a partir de una imagen (Grafana)
 Este servicio será el encargado de graficar todas las métricas creadas por el servicio de Prometheus. Por tanto, siempre arrancará tras él. En nuestro caso, el servicio de grafana se encargará de arrancar en el puerto 3500 de nuestro host un contenedor (grafana_practica) basado en la imagen grafana/grafana:7.1.5 que, además, se caracterizará por: 
 
 Establecer las variables de entorno necesarias para: 
