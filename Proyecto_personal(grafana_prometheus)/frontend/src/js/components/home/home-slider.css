@@ -1,0 +1,31 @@
+:root {
+    --color-app: #ffc900;
+}
+
+.buttons-slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons-slider a {
+    padding: 10px 30px;
+    background-color: var(--color-app);
+    cursor: pointer;
+    color: white;
+    margin-top: 10px;
+}
+
+.buttons-slider a:hover {
+    color: black;
+    background-color: white;
+}
+
+h1,
+h2 {
+    margin: 10px;
+}
+
+.ng-scope {
+    bottom: 37% !important;
+}

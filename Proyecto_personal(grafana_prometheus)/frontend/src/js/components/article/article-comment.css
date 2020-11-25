@@ -1,0 +1,14 @@
+article {
+    position: relative;
+}
+
+delete-btn {
+    position: absolute;
+    cursor: pointer;
+    top: 12px;
+    right: 40px;
+}
+
+delete-btn:hover {
+    color: red;
+}

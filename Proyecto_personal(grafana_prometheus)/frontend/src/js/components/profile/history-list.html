@@ -1,0 +1,16 @@
+<!-- {{$ctrl.matches}} -->
+<link rel="stylesheet" href="css/components/profile/history-list.css">
+<div ng-click="$ctrl.createMatch()" class="button nav-item" style="margin-left: 100px">Play Game</div>
+
+<div class="matches">
+    <div ng-repeat="match in $ctrl.matches" class="match">
+        <div class="user">
+            <img src="{{match.author.image}}" alt="">
+            <p>{{match.author.username}}</p>
+        </div>
+        <div class="result {{ match.result ? 'green' : 'red' }}">
+            <p>Resultado: {{ match.result ? "GANADO" : "PERDIDA" }}</p>
+            <p></p>
+        </div>
+    <div>
+</div>

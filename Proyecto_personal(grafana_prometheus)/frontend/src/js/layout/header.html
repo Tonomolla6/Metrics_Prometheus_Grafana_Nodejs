@@ -1,0 +1,92 @@
+<nav class="navbar navbar-light">
+
+    <div class="container">
+
+        <a class="title-logo navbar-brand" ui-sref="app.home">
+            <i class="fas fa-crown"></i>
+            <p ng-bind="::$ctrl.appName | lowercase"></p>
+        </a>
+
+        <!-- Show this for logged out users -->
+        <ul show-authed="false" class="nav navbar-nav pull-xs-right">
+
+            <li class="nav-item">
+                <a class="nav-link" ui-sref-active="active" ui-sref="app.home">
+                    Home
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" ui-sref-active="active" ui-sref="app.board">
+                    Board
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" ui-sref-active="active" ui-sref="app.winners">
+                    Top Winners
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link button" ui-sref-active="active" ui-sref="app.login">
+                    Log in
+                </a>
+            </li>
+        </ul>
+
+        <!-- Show this for logged in users -->
+        <ul show-authed="true" class="nav navbar-nav pull-xs-right">
+
+            <li class="nav-item">
+                <a class="nav-link" ui-sref-active="active" ui-sref="app.home">
+                    Home
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" ui-sref-active="active" ui-sref="app.board">
+                    Board
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" ui-sref-active="active" ui-sref="app.winners">
+                    Top Winners
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" ui-sref-active="active" ui-sref="app.editor">
+                    <i class="ion-compose"></i>&nbsp;New Article
+                </a>
+            </li>
+
+            <li class="nav-item user">
+                <a class="nav-link" ui-sref-active="active">
+                    <img ng-src="{{$ctrl.currentUser.image}}" class="user-pic" /> {{ $ctrl.currentUser.username }}
+                    <i class="fas fa-angle-down"></i>
+                </a>
+
+                <ul class="user-list">
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.profile.main({ username: $ctrl.currentUser.username})">
+                            <i class="fas fa-user-alt"></i>&nbsp;Profile
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref-active="active" ui-sref="app.settings">
+                            <i class="ion-gear-a"></i>&nbsp;Settings
+                        </a>
+                    </li>
+                    <li class="nav-item logout">
+                        <a class="nav-link" ng-click="$ctrl.logout()">
+                            <i class="fas fa-sign-out-alt"></i>&nbsp;Log Out
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+    </div>
+</nav>

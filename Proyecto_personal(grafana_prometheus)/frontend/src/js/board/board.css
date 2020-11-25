@@ -1,0 +1,135 @@
+:root {
+    --color-app: #ffc900;
+}
+
+.board-page.ng-scope {
+    padding: 10px;
+}
+
+.container.page {
+    margin-bottom: 25px;
+    padding: 0;
+}
+
+.board-page.ng-scope {
+    background-image: url(https://cdn.pixabay.com/photo/2015/01/18/13/34/gambling-602976_1280.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container.page {
+    min-height: 800px;
+    background-color: transparent;
+}
+
+section {
+    display: flex;
+}
+
+section .left-page {
+    background-color: white;
+    width: 75%;
+    min-height: 800px;
+    margin-right: 10px;
+    padding: 20px;
+}
+
+section .left-page hr {
+    background-color: var(--color-app);
+    border-color: var(--color-app);
+    height: 2.5px;
+    width: 180px;
+    margin: 0;
+}
+
+section .right-page {
+    background-color: white;
+    width: 25%;
+    min-height: 800px;
+    margin-left: 10px;
+    padding: 20px;
+}
+
+section .right-page hr {
+    background-color: var(--color-app);
+    border-color: var(--color-app);
+    height: 2px;
+    width: 50%;
+    margin: 0;
+}
+
+div.component {
+    height: 200px;
+    background-color: white;
+    margin-bottom: 10px;
+}
+
+div.friends {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 10px;
+}
+
+div.friend {
+    display: flex;
+    align-items: center;
+    border: 2px dashed transparent;
+    cursor: pointer;
+    padding: 5px;
+    margin: 2px 0px;
+}
+
+
+div.friend.active {
+    border-color: var(--color-app);
+    color: var(--color-app);
+}
+
+div.friend:hover {
+    background: #fff9e0;
+    border-color: var(--color-app);
+    color: var(--color-app);
+}
+
+div.friend img {
+    width: 45px;
+    border-radius: 100%;
+}
+
+div.friend h6 {
+    margin: 10px;
+    font-weight: bold;
+}
+
+div.friends-separator hr {
+    height: 1px;
+    width: 80%;
+    margin: 5px 10%;
+}
+
+.all-img {
+    width: 45px;
+    height: 45px;
+    border: 2px solid var(--color-app);
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+.not-logged {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    flex-direction: column;
+}
+
+.messages.ng-scope {
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}

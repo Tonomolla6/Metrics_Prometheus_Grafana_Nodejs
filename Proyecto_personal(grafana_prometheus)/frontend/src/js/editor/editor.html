@@ -1,0 +1,64 @@
+<link rel="stylesheet" href="css/editor/editor.css">
+<div class="editor-page">
+  <div class="container page">
+    <div class="row">
+      <div class="col-md-10 offset-md-1 col-xs-12">
+
+        <h1 class="text-xs-center">Create a new article for your followers</h1>
+        <hr>
+        <list-errors errors="$ctrl.errors"></list-errors>
+
+        <form>
+          <fieldset ng-disabled="$ctrl.isSubmitting">
+
+            <!-- Titulo del articulo -->
+            <label>Article title</label>
+
+            <fieldset class="form-group">
+              <input class="form-control form-control-lg"
+                ng-model="$ctrl.article.title"
+                type="text"
+                placeholder="The Murcian Pedro Herrera has won 100,0..." />
+            </fieldset>
+
+            <!-- Titulo del articulo -->
+            <label>Description</label>
+
+            <fieldset class="form-group">
+              <textarea class="form-control"
+                rows="8"
+                ng-model="$ctrl.article.description"
+                placeholder="The world game last Tuesday at 18:00 was perfect for our player Pedr...">
+              </textarea>
+            </fieldset>
+
+            <!-- Url Image -->
+            <label>Image</label>
+
+            <fieldset class="form-group">
+              <input class="form-control form-control-lg"
+                ng-model="$ctrl.article.image"
+                type="text"
+                placeholder="https://image.im/image_artic..." />
+            </fieldset>
+
+            <!-- Control access -->
+            <label for="">Do you want only your followers to see this article?</label>
+            <fieldset>
+              <input ng-model="$ctrl.article.private" type="checkbox"/>
+              Private
+            </fieldset>
+
+
+            <div class="center">
+              <button class="button" type="button" ng-click="$ctrl.submit()">
+                Publish Article
+              </button>
+            </div>
+          </fieldset>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

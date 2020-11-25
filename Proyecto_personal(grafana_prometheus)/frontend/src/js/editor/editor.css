@@ -1,0 +1,56 @@
+:root {
+    --color-app: #ffc900;
+}
+
+.editor-page.ng-scope {
+    padding: 10px;
+}
+
+.container.page {
+    margin-bottom: 25px;
+}
+
+hr {
+    color: var(--color-app);
+    height: 2px;
+    background-color: var(--color-app);
+    border: none;
+    width: 40%;
+    margin: 30px auto;
+}
+
+.editor-page.ng-scope {
+    background-image: url(https://cdn.pixabay.com/photo/2013/02/16/17/36/las-vegas-82319_1280.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    height: 45px;
+    font-size: 17px;
+    line-height: 1.25;
+    color: #55595c;
+    background-color: #fff;
+    background-image: none;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+}
+
+.center  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.center button {
+    width: 200px;
+}
+
+input.checkbox {
+    margin-right: 3px;
+}

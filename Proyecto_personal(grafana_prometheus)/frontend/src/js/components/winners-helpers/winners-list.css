@@ -1,0 +1,72 @@
+.pagination_winners span {
+    cursor: pointer;
+    padding: 3px 8px;
+}
+
+.pagination_winners span.active,
+.pagination_winners span:hover {
+    border-color: var(--color-app);
+    color: white;
+    background-color: var(--color-app);
+}
+
+.pagination_winners {
+    margin-top: 25px;
+    color: black;
+    padding: 3px 8px;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+}
+
+table img {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+th.image {
+    width: 10px;
+}
+
+tr {
+    cursor: pointer;
+}
+
+td,
+th {
+    padding: 5px 10px;
+    text-align: start;
+    height: 45px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr th {
+    order: 1px solid var(--color-app);
+    background-color: var(--color-app);
+    color: white;
+    cursor: text;
+}
+
+tr:hover {
+    background-color: #ffc90029;
+} 

@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="css/components/board/popular-news.css">
+
+<div class="title">
+    <h4>Popular posts</h4>
+    <hr>
+</div>
+
+<div class="news_popular">
+    <div class="new_popular {{user.news}}" ng-repeat="new in $ctrl.news">
+        <div class="effect">
+            <a href="/#!/article"></a>
+            <div class="img" style="background-image: url({{new.image}})"></div>
+        </div>
+        <div class="text">
+            <h5 class="name"><strong>{{new.title}}</strong></h5>
+            <p>{{new.description}}</p>
+        </div>
+    </div>
+</div>

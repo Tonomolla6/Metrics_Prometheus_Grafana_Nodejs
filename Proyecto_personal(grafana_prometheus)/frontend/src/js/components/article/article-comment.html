@@ -1,0 +1,14 @@
+<link rel="stylesheet" href="css/components/article/article-comment.css">
+<div class="comment">
+    <header>
+        <img class="profile" src="{{$ctrl.comment.author.image}}" alt="">
+    </header>
+    <article>
+        <delete-btn comment="$ctrl.comment" article="$ctrl.article"></delete-btn>
+        <div class="description ng-binding">
+            <p style="margin: 8px;"><strong>@{{$ctrl.comment.author.username}}</strong> {{$ctrl.comment.description}}</p>
+        </div>
+        <p class="date">{{$ctrl.comment.createdAt | date: 'longDate'}}</p>
+    </article>
+    <hr>
+</div>

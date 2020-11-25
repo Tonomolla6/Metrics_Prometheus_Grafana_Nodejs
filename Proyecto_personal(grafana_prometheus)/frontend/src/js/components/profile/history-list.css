@@ -1,0 +1,17 @@
+.match img {
+    width: 45px;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: springgreen;
+}

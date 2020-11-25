@@ -1,0 +1,57 @@
+:root {
+    --color-app: #ffc900;
+}
+
+.podium {
+    display: flex;
+    align-items: flex-end;
+    margin: 30px 0px;
+}
+
+.podium .user {
+    padding: 30px;
+    border: 1px solid black;
+    margin: 1%;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.user0 {
+    height: 460px;
+}
+
+.user1 {
+    height: 500px;
+}
+
+.user2 {
+    height: 430px;
+}
+
+img.image {
+    width: 130px;
+    height: 130px;
+    border-radius: 100%;
+    margin-bottom: 20px;
+    object-fit: cover;
+}
+
+.user h3 {
+    color: var(--color-app);
+    font-weight: bold;
+    font-size: 50px;
+}
+
+.button-winner-top {
+    border: 2px dashed var(--color-app);
+    padding: 10px 30px;
+    cursor: pointer;
+}
+
+.button-winner-top:hover {
+    background-color: var(--color-app);
+    color: white;
+}

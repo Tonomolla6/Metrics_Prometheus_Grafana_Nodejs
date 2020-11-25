@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="css/components/winners-helpers/winners-list.css">
+<div class="title">
+    <p>{{$ctrl.total}}</p>
+        <table>
+            <tr>
+                <th class="image"></th>
+                <th>Name</th>
+                <th>Times won</th>
+                <th>Times losses</th>
+                <th>Position</th>
+            </tr>
+            <tr ng-repeat="user in $ctrl.users_paged">
+                <td><img src="{{user.image}}" alt=""></td>
+                <td>{{user.username}}</td>
+                <td>{{user.won}}</td>
+                <td>{{user.losses}}</td>
+                <td>1</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="pagination_winners">
+        <span ng-click="$ctrl.changePage($ctrl.selectedPage - 2)"><i class="fas fa-arrow-left"></i></span>
+        <span ng-click="$ctrl.changePage(this.$index)" class="{{ $index+1 == $ctrl.selectedPage ? 'active' : '' }}" ng-repeat="x in [].constructor(pages) track by $index">
+            {{ $index+1 }}
+        </span>
+        <span ng-click="$ctrl.changePage($ctrl.selectedPage)"><i class="fas fa-arrow-right"></i></span>
+    </div>
+</div>
+</div>

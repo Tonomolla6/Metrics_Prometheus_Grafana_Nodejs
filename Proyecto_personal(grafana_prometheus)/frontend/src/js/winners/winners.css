@@ -1,0 +1,13 @@
+.winners-page.ng-scope {
+    padding: 10px;
+}
+
+.container.page {
+    margin-bottom: 25px;
+}
+
+.winners-page.ng-scope {
+    background-image: url(https://cdn.pixabay.com/photo/2015/01/18/13/34/gambling-602976_1280.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}

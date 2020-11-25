@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="css/article/article.css">
+<div class="article-page primary">
+    <div class="container page">
+        <!-- Pintar el articulo -->
+        <article-draw article="$ctrl.article"></article-draw>
+
+
+        <!-- Crear el articulo -->
+        <div class="article">
+            <p class="header">All Comments ({{$ctrl.article.commentsCount}})</p>
+            <div class="comments">
+                <article-comment ng-repeat="comment in $ctrl.comments" article="$ctrl.article" comment="comment"></article-comment>
+            </div>
+            <form class="input_comment" ng-submit="$ctrl.newComment()" ng-disabled="$ctrl.form.isSubmitting">
+                <p class="header">New Comment</p>
+                <textarea ng-model="$ctrl.form.description" placeholder="Write a comment..."></textarea>
+                <button class="button" type="submit">Enviar</button>
+            </form>
+        </div>
+        <!--  -->
+        <!-- Pintar comentarios -->
+    </div>
+</div>

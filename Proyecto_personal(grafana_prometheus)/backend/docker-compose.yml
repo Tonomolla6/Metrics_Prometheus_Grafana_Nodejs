@@ -1,0 +1,81 @@
+version: "3"
+
+services:
+    rest:
+        image: mhart/alpine-node:8
+        command: npm run dev
+        restart: on-failure
+        working_dir: /app
+        volumes:
+            - ./rest:/app
+        ports:
+            - "3000:3000"
+        links: 
+            - 'mongo'
+        depends_on:
+            - 'mongo'
+        networks:
+            network_practica:
+
+    graphql:
+        image: mhart/alpine-node:8
+        command: npm run dev
+        restart: on-failure
+        working_dir: /app
+        volumes:
+            - ./graphql:/app
+        ports:
+            - "3002:3002"
+        links: 
+            - 'mongo'
+        depends_on:
+            - 'mongo'
+        networks:
+            network_practica:
+
+    mongo:
+        image: mvertes/alpine-mongo
+        ports:
+            - "27018:27017"
+        volumes:
+            - /data/db
+        networks:
+            network_practica:
+
+    prometheus_practica_service:
+        container_name: prometheus_practica2
+        image: prom/prometheus:v2.20.1
+        ports:
+        - "9090:9090"
+        networks:
+            network_practica:
+        volumes:
+        - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+        command: --config.file=/etc/prometheus/prometheus.yml
+        depends_on:
+        - rest
+
+    grafana_practica_service:
+        container_name: grafana_practica2
+        image: grafana/grafana:7.1.5
+        ports:
+        - "3500:3000"
+        networks:
+            network_practica:
+        environment:
+            GF_AUTH_DISABLE_LOGIN_FORM: "true"
+            GF_INSTALL_PLUGINS: grafana-clock-panel 1.0.1
+            GF_AUTH_ANONYMOUS_ENABLED: "true"
+            GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
+        volumes:
+        - 'myGrafanaVol:/var/lib/grafana/'
+        - './grafana/datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml'
+        depends_on:
+        - prometheus_practica_service
+
+volumes:
+  myGrafanaVol:
+
+networks:
+  network_practica:
+    external: true

@@ -1,0 +1,125 @@
+:root {
+    --color-app: #ffc900;
+}
+
+.row {
+    margin: 0;
+    background-color: white;
+    width: 40vw;
+}
+
+.auth-page {
+    background-image: url(https://cdn.pixabay.com/photo/2016/03/11/08/48/casino-1249899_1280.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.page {
+    background: transparent;
+    height: 90vh;
+    display: flex;
+}
+
+.container.page {
+    margin-top: 0;
+}
+
+hr {
+    width: 2px;
+    height: 2px;
+    background: var(--color-app);
+    height: 100%;
+    margin: 0px 4vw;
+}
+
+.page_row {
+    margin: 0;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.row_bank {
+    color: var(--color-app);
+    text-align: justify;
+    background: #0000007d;
+}
+
+.row_bank h1 {
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+}
+
+.row_bank p {
+    font-size: 21px;
+    margin: 25px;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: var(--color-app);
+    border-color: var(--color-app);
+    padding: 8px 14px;
+    font-size: 18px;
+    border: 1px solid var(--color-app) !important;
+    border-radius: 0;
+}
+
+.btn-primary:hover {
+    background-color: white;
+    color: var(--color-app);
+}
+
+hr.social {
+    height: 0.6px;
+    width: 75%;
+    margin: 20px 10px 10px 10px;
+    border-color: var(--color-app);
+}
+
+input {
+    font-size: 18px !important;
+    border-radius: 0 !important;
+    padding: 0px 18px !important;
+}
+
+.social_button {
+    padding: 7px 60px;
+    border: 1px solid var(--color-app);
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.social_button:hover {
+    color: var(--color-app);
+}
+
+.btn-primary:active:hover,
+.btn-primary:active:focus,
+.btn-primary:active.focus,
+.btn-primary.active:hover,
+.btn-primary.active:focus,
+.btn-primary.active.focus,
+.open>.btn-primary.dropdown-toggle:hover,
+.open>.btn-primary.dropdown-toggle:focus,
+.open>.btn-primary.dropdown-toggle.focus {
+    color: #fff;
+    background-color: var(--color-app);
+    border-color: var(--color-app);
+    padding: 8px 14px;
+    font-size: 18px;
+    border: 1px solid var(--color-app) !important;
+    border-radius: 0;
+}
+
+svg {
+    font-size: 10px;
+    height: 20px;
+    margin-right: 10px;
+}

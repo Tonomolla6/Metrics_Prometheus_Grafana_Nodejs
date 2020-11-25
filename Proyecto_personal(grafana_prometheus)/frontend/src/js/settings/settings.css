@@ -1,0 +1,37 @@
+:root {
+    --color-app: #ffc900;
+}
+
+.settings-page.ng-scope {
+    padding: 10px;
+}
+
+.container.page {
+    margin-bottom: 25px;
+}
+
+.settings-page.ng-scope {
+    background-image: url(https://cdn.pixabay.com/photo/2017/04/20/18/33/roulette-2246562_1280.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+hr.title {
+    background-color: var(--color-app);
+    border-color: var(--color-app);
+    height: 3px;
+}
+
+.center  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.center button {
+    width: 200px;
+}
+
+input, textarea {
+    font-size: 17px !important;
+}

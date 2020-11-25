@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="css/components/article/article-draw.css">
+<div class="news">
+    <delete-btn article="$ctrl.article"></delete-btn>
+    <div class="new">
+        <header>
+            <img class="profile" src="{{$ctrl.article.author.image}}" alt="">
+            <div class="text">
+                <h6>@{{$ctrl.article.author.username}}</h6>
+                <p>{{$ctrl.article.updatedAt | date: 'longDate'}}</p>
+            </div>
+        </header>
+        <article>
+            <div class="title">
+                {{$ctrl.article.title}}
+            </div>
+            <div class="description">
+                {{$ctrl.article.description}}
+            </div>
+            <img ng-if="$ctrl.article.image" class="image" src="{{$ctrl.article.image}}" alt="Imagen no disponible">
+            
+            <section class="social_control_post">
+                <comment-btn article="$ctrl.article"></comment-btn>
+                <favorite-btn article="$ctrl.article"></favorite-btn>
+            </section>
+        </article>
+    </div>
+    <hr>
+</div>

@@ -1,0 +1,6 @@
+<div ng-class="{ 'disabled' : $ctrl.isSubmitting,
+            'active': $ctrl.article.favorited }"
+ng-click="$ctrl.submit()">
+<i class="fas fa-heart"></i>
+  <p>{{$ctrl.article.favoritesCount}}</p>
+</div>
