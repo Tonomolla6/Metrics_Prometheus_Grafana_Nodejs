@@ -1,7 +1,7 @@
 # PRACTICA ENTREGABLE DOCKER
 
-## ¿Qué es Docker?
 ![docker](img/docker.jpg)
+## ¿Qué es Docker?
 Docker es un software que nos permite crear contenedores, facilita la miGracion entre diferentes plataformas y garantiza su funcionamiento completo, asi evitando cualquier tipo de posible problema de dependencia entre versiones de software. Su funcionamiento ser basa en compartir un único sistema operativo en la máquina que lo hospeda.
 
 ## ¿Qué es Docker Compose?
@@ -184,7 +184,7 @@ El servicio en docker compose quedaria asi:
      - myapp_practica_service
 ```
 
-### Crear un contenedor con Docker Compose a partir de una imagen (Prometheus)
+### Crear un contenedor con Docker Compose a partir de una imagen (Grafena)
 Este servicio será el encargado de graficar todas las métricas creadas por el servicio de Prometheus. Por tanto, siempre arrancará tras él. En nuestro caso, el servicio de grafana se encargará de arrancar en el puerto 3500 de nuestro host un contenedor (grafana_practica) basado en la imagen grafana/grafana:7.1.5 que, además, se caracterizará por: 
 
 Establecer las variables de entorno necesarias para: 
@@ -262,3 +262,93 @@ El servicio en docker compose quedaria asi:
 volumes:
   myGrafanaVol:
 ```
+Finalmente el docker-compose.yml quedaria asi:
+
+```yml
+version: "3"
+services:
+  myapp_practica_service:
+    container_name: myapp_practica
+    build: ./src/
+    ports:
+      - "83:3000"
+    networks:
+      network_practica:
+
+  prometheus_practica_service:
+    container_name: prometheus_practica
+    image: prom/prometheus:v2.20.1
+    ports:
+      - "9090:9090"
+    networks:
+      network_practica:
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command: --config.file=/etc/prometheus/prometheus.yml
+    depends_on:
+     - myapp_practica_service
+
+  grafana_practica_service:
+    container_name: grafana_practica
+    image: grafana/grafana:7.1.5
+    ports:
+      - "3500:3000"
+    networks:
+      network_practica:
+    environment:
+      GF_AUTH_DISABLE_LOGIN_FORM: "true"
+      GF_INSTALL_PLUGINS: grafana-clock-panel 1.0.1
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
+    volumes:
+      - 'myGrafanaVol:/var/lib/grafana/'
+      - './grafana/datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml'
+    depends_on:
+     - prometheus_practica_service
+
+volumes:
+  myGrafanaVol:
+
+networks:
+  network_practica:
+    external: true
+```
+
+Ejecutamos para iniciar los contenedores y establecer la conexion.
+```sh
+docker-compose up
+```
+![docker](img/inicio.png)
+
+## Verificacion de la instalacion
+Verificar que, tras implementar todo lo necesario, lo siguiente: 
+- Se accede correctamente a la aplicación que se ejecuta en el contenedor a través del puerto 83 
+
+![docker](img/localhost_83.png)
+
+- Se accede correctamente a Prometheus en el puerto 9090 y que en el apartado Status -> Targets se muestra el acceso correcto a las métricas capturadas en la app.
+
+![docker](img/prometheus.png)
+
+- Se accede correctamente a la aplicación de Grafana en el puerto 3500 y se puede crear un nuevo dashboard para poder incluir paneles en los que mostrar las métricas recogidas en la app.
+
+Vamos a añadir dos graficas de los endpoints de la app para ver como funciona:
+
+![docker](img/grafana_ima1.png)
+
+Creamos un dashboard:
+
+![docker](img/grafana_ima2.png)
+
+Añadimos un panel nuevo:
+
+![docker](img/grafana_ima3.png)
+
+Para que se muestren los endpoints le damos a Metrics > (El endpoint que queremos registrar).
+
+![docker](img/grafana_ima4.png)
+
+Hacemos algunas pruebas a los endpoints de nuestra aplicacion /metrics /message
+Podemos observar las peticiones.
+
+![docker](img/grafana_ima5.png)
