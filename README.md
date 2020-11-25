@@ -334,21 +334,21 @@ Verificar que, tras implementar todo lo necesario, lo siguiente:
 
 Vamos a añadir dos graficas de los endpoints de la app para ver como funciona:
 
-![docker](img/grafana_ima1.png)
+![docker](img/grafana_img1.png)
 
 Creamos un dashboard:
 
-![docker](img/grafana_ima2.png)
+![docker](img/grafana_img2.png)
 
 Añadimos un panel nuevo:
 
-![docker](img/grafana_ima3.png)
+![docker](img/grafana_img3.png)
 
 Para que se muestren los endpoints le damos a Metrics > (El endpoint que queremos registrar).
 
-![docker](img/grafana_ima4.png)
+![docker](img/grafana_img4.png)
 
 Hacemos algunas pruebas a los endpoints de nuestra aplicacion /metrics /message
 Podemos observar las peticiones.
 
-![docker](img/grafana_ima5.png)
+![docker](img/grafana_img5.png)
